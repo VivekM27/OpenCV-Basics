@@ -26,10 +26,11 @@ timestr = time.strftime("%Y%m%d-%H%M%S")
 
 # Remove .streamlit from page title tag
 st.set_page_config(
-   page_title = "Vivek Vision",
-   page_icon = "🧊",
-   layout = "wide",
-   initial_sidebar_state = "expanded",
+    page_title = "Vivek Vision",
+    # page_icon = "🧊",
+    page_icon = "emoji-wink",
+    layout = "wide",
+    initial_sidebar_state = "expanded",
 )
 
 # Custom Method to find extension of a file name
