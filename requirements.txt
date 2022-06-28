@@ -4,3 +4,4 @@ opencv-python-headless
 mediapipe
 streamlit_authenticator
 imutils==0.5.4
+pytesseract==0.3.9
