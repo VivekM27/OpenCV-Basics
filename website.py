@@ -16,6 +16,7 @@ from Python.blur import imgS
 from Python.edgedetection import imgT
 from Python.featureDetection import FaceDetector
 from Python.genderDetect import genderDet
+from Python.LicensePlateDetection import LPD
 from streamlit_image_comparison import image_comparison
 
 # Utils
@@ -171,6 +172,12 @@ def fullMethod(FileNameWithoutExtension, ImageCaption, Operation, SuccessMessage
             GDTC = genderDet(IMG, __FILE_WITH_EXTENSION)
             Value = GDTC.predict_gender(__FILE_WITH_EXTENSION, "frame")
             ImageCaption = GDTC.predict_gender(__FILE_WITH_EXTENSION, "label")
+
+        if Operation == 9:
+            LPS = LPD(IMG, __FILE_WITH_EXTENSION)
+            GDTC = genderDet(IMG, __FILE_WITH_EXTENSION)
+            Value = LPS.licensePD()
+            ImageCaption = LPS.plateNumber()
 
             # __technique = st.radio("Select one Blurring Algorithm", ('Canny', 'Sobel Laplace'))
             # if __technique == 'Canny':
@@ -474,8 +481,8 @@ if selected == "Detection":
     with st.sidebar:
         choice = option_menu(
             "Detection", 
-            ["Face Detection", "Gender Detection"], 
-            icons = ['person-circle', 'people-fill'], 
+            ["Face Detection", "Gender Detection", "Vehicle Detection"], 
+            icons = ['person-circle', 'people-fill', 'bicycle'],
             menu_icon = "person-bounding-box"
         )
     
@@ -491,4 +498,11 @@ if selected == "Detection":
         fullMethod(
             "detect", "Gender Detected Image", 8,
             "Image Gender Detected", "Gender Based"
+        )
+
+    # When "Vehicle Detection" button is clicked on Side bar navigation panel
+    if choice == "Vehicle Detection":
+        fullMethod(
+            "detect", "Vehicle Detected Image", 9,
+            "Image Vehicle Detected", "Vehcile Based"
         )
