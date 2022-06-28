@@ -3,3 +3,4 @@ streamlit_option_menu
 opencv-python-headless
 mediapipe
 streamlit_authenticator
+imutils==0.5.4
