@@ -16,9 +16,6 @@ class LPD:
 
     def licensePD(self):
         if self._PATH[self._LENGTH - 3:] == "png" or self._PATH[self._LENGTH - 3:] == "bmp" or self._PATH[self._LENGTH - 3:] == "jpg" or self._PATH[self._LENGTH - 4:] == "jpeg":
-            # Image loaded and resized to 300 pixels
-            self._IMG = imutils.resize(self._IMG, width = 300)
-
             # Conversion to Greyscale
             self.__GRAY_IMG = cv2.cvtColor(self._IMG, cv2.COLOR_BGR2GRAY)
 
