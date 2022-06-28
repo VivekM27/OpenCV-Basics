@@ -5,7 +5,7 @@ import pytesseract
 import numpy as np
 
 # Tesseract path
-pytesseract.pytesseract.tesseract_cmd = r'D:\Developement\\Tesseract\\tesseract.exe'
+# pytesseract.pytesseract.tesseract_cmd = r'D:\Developement\\Tesseract\\tesseract.exe'
 
 class LPD:
     def __init__(self, Img, Path):
