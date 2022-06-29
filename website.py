@@ -229,7 +229,7 @@ def fullMethod(FileNameWithoutExtension, ImageCaption, Operation, SuccessMessage
                     st.image("Images/upload" + __EXTENSION, caption = 'Original Image', width = 400)
                 with col2:
                     st.image("Images/" + FileNameWithoutExtension + __EXTENSION, caption = ImageCaption, width = 400)
-                if ImageCaption < 1:
+                if ImageCaption == 0:
                     st.warning("No Chosen type Vehicle Detected!!!")
                 else:
                     st.success(SuccessMessage + "!!!")
@@ -246,7 +246,7 @@ def fullMethod(FileNameWithoutExtension, ImageCaption, Operation, SuccessMessage
                 c1, c2, c3 = st.columns([0.32, 0.3, 0.38])
                 with c2:
                     st.text('Original vs Processed')
-                if ImageCaption < 1:
+                if ImageCaption == 0:
                     st.warning("No Chosen type Vehicle Detected!!!")
                 else:
                     st.success(SuccessMessage + "!!!")    
