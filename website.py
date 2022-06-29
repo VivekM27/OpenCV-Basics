@@ -16,7 +16,8 @@ from Python.blur import imgS
 from Python.edgedetection import imgT
 from Python.featureDetection import FaceDetector
 from Python.genderDetect import genderDet
-from Python.LicensePlateDetection import LPD
+from Python.licenseplatedetection import LPD
+from Python.vehicledetection import machineDetection
 from streamlit_image_comparison import image_comparison
 
 # Utils
@@ -175,9 +176,18 @@ def fullMethod(FileNameWithoutExtension, ImageCaption, Operation, SuccessMessage
 
         if Operation == 9:
             LPS = LPD(IMG, __FILE_WITH_EXTENSION)
-            GDTC = genderDet(IMG, __FILE_WITH_EXTENSION)
             Value = LPS.licensePD()
             ImageCaption = LPS.plateNumber()
+
+        if Operation == 10:
+            VD = machineDetection(IMG, __FILE_WITH_EXTENSION)
+            Value = VD.carDetector("image")
+            ImageCaption = VD.carDetector("")
+
+        if Operation == 11:
+            VD = machineDetection(IMG, __FILE_WITH_EXTENSION)
+            Value = VD.busDetector("image")
+            ImageCaption = VD.busDetector("")
 
             # __technique = st.radio("Select one Blurring Algorithm", ('Canny', 'Sobel Laplace'))
             # if __technique == 'Canny':
@@ -224,7 +234,10 @@ def fullMethod(FileNameWithoutExtension, ImageCaption, Operation, SuccessMessage
                     st.image("Images/upload" + __EXTENSION, caption = 'Original Image', width = 400)
                 with col2:
                     st.image("Images/" + FileNameWithoutExtension + __EXTENSION, caption = ImageCaption, width = 400)
-                st.success(SuccessMessage + "!!!")
+                if ImageCaption < 1:
+                    st.warning("No Chosen type Vehicle Detected!!!")
+                else:
+                    st.success(SuccessMessage + "!!!")
 
             if option == 'Slider':
                 c1, c2, c3 = st.columns([0.2, 0.6, 0.2])
@@ -237,8 +250,11 @@ def fullMethod(FileNameWithoutExtension, ImageCaption, Operation, SuccessMessage
                     )
                 c1, c2, c3 = st.columns([0.32, 0.3, 0.38])
                 with c2:
-                    st.text('Original vs ' + ImageCaption)
-                st.success(SuccessMessage + "!!!")    
+                    st.text('Original vs Processed')
+                if ImageCaption < 1:
+                    st.warning("No Chosen type Vehicle Detected!!!")
+                else:
+                    st.success(SuccessMessage + "!!!")    
 
             # Button to click and download image
             __UPLOAD = __PATH + FileNameWithoutExtension + __EXTENSION
@@ -472,17 +488,13 @@ if selected == "Edit Image":
 
 # When "Detection" button is clicked on Side bar navigation panel
 if selected == "Detection":
-    
-    col1, col2 = st.columns(2)
-    with col1:
-        st.image('Images/logo.png', use_column_width = True)
 
     # Creates a sidebar navigation panel
     with st.sidebar:
         choice = option_menu(
             "Detection", 
-            ["Face Detection", "Gender Detection", "Vehicle Detection"], 
-            icons = ['person-circle', 'people-fill', 'bicycle'],
+            ["Face Detection", "Gender Detection", "License Detection", "Vehicle Detection"], 
+            icons = ['person-circle', 'people-fill', 'tablet-landscape', 'bicycle'],
             menu_icon = "person-bounding-box"
         )
     
@@ -500,9 +512,32 @@ if selected == "Detection":
             "Image Gender Detected", "Gender Based"
         )
 
+    # When "License Detection" button is clicked on Side bar navigation panel
+    if choice == "License Detection":
+        fullMethod(
+            "detect", "License Plate Detected Image", 9,
+            "License Plate Detected", "License Plate Based"
+        )
+
     # When "Vehicle Detection" button is clicked on Side bar navigation panel
     if choice == "Vehicle Detection":
-        fullMethod(
-            "detect", "Vehicle Detected Image", 9,
-            "Image Vehicle Detected", "Vehcile Based"
+        col1, col2 = st.columns(2)
+        with col1:
+            st.image('Images/logo.png', use_column_width = True)
+            
+        option = st.selectbox(
+            'Which Vehicle Detection to Perform?',
+            ('Car', 'Bus')
         )
+
+        if option == "Car":
+            fullMethod(
+                "detect", "Car Detected Image", 10,
+                "Car Detected", "Car Based"
+            )
+
+        if option == "Bus":
+            fullMethod(
+                "detect", "Bus Detected Image", 11,
+                "Bus Detected", "Bus Based"
+            )

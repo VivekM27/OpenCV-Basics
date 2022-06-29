@@ -5,6 +5,9 @@ import pytesseract
 import numpy as np
 
 # Tesseract path
+# Must un - comment when running on Local machine only
+# Provide local tesseract installed path
+# Comment when using Github and Streamlit
 # pytesseract.pytesseract.tesseract_cmd = r'D:\Developement\\Tesseract\\tesseract.exe'
 
 class LPD:
