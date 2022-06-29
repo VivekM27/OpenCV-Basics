@@ -491,7 +491,7 @@ if selected == "Detection":
     with st.sidebar:
         choice = option_menu(
             "Detection", 
-            ["Face Detection", "Gender Detection", "License Detection", "Vehicle Detection"], 
+            ["Face Detection", "Gender Detection", "License Plate Detection", "Vehicle Detection"], 
             icons = ['person-circle', 'people-fill', 'tablet-landscape', 'bicycle'],
             menu_icon = "person-bounding-box"
         )
@@ -511,7 +511,7 @@ if selected == "Detection":
         )
 
     # When "License Detection" button is clicked on Side bar navigation panel
-    if choice == "License Detection":
+    if choice == "License Plate Detection":
         fullMethod(
             "detect", "License Plate Detected Image", 9,
             "License Plate Detected", "License Plate Based"
