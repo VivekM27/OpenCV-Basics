@@ -334,8 +334,11 @@ if selected == "About":
         st.text("1. Remove Unwanted Background including those sneaky and sticky people XD")
         st.text("2. Find Grayscale images to feel the black white days of 70s")
         st.text("3. Change - Rotate - Blurr - Detect Edge --- 4 in 1 solution found at Edit Image sub menu option")
-        st.text("4. Detect number of humans in an image - Feeling ghosted already?")
-        st.text("5. We are planning on many more easy and quick solutions so keep this website bookmarked!!!!")
+        st.text("4.1 Detect number of humans in an image - Feeling ghosted already?")
+        st.text("4.2 A whole new range of Detection features added - Detecte what though - try it via our Detection Interface Option")
+        st.text("5.1 Feature planned to be added - Lane Detection")
+        st.text("5.2 Try it from our Beta - in progress Interface Option inside Detection")
+        st.text("6. We are planning on many more easy and quick solutions so keep this website bookmarked!!!!")
 
 # When "Upload" button is clicked on Side bar navigation panel
 if selected == "Upload":
@@ -493,8 +496,8 @@ if selected == "Detection":
     with st.sidebar:
         choice = option_menu(
             "Detection", 
-            ["Face Detection", "Gender Detection", "License Detection", "Vehicle Detection"], 
-            icons = ['person-circle', 'people-fill', 'tablet-landscape', 'bicycle'],
+            ["Face Detection", "Gender Detection", "License Detection", "Vehicle Detection", "Beta - in progress"], 
+            icons = ['person-circle', 'people-fill', 'tablet-landscape', 'bicycle', 'lock-fill'],
             menu_icon = "person-bounding-box"
         )
     
@@ -541,3 +544,10 @@ if selected == "Detection":
                 "detect", "Bus Detected Image", 11,
                 "Bus Detected", "Bus Based"
             )
+    
+    # When "Beta - in progress" button is clicked on Side bar navigation panel
+    if choice == "Beta - in progress":
+        fullMethod(
+            "detect", "License Plate Detected Image", 12,
+            "License Plate Detected", "License Plate Based"
+        )
