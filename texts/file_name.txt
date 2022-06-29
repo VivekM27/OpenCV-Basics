@@ -1,1 +1,1 @@
-grayscale.jpg
+lane_3.jpg

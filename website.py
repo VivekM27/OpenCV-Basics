@@ -18,6 +18,7 @@ from Python.featureDetection import FaceDetector
 from Python.genderDetect import genderDet
 from Python.licenseplatedetection import LPD
 from Python.vehicledetection import machineDetection
+from Python.lanedetection import LaneDetector
 from streamlit_image_comparison import image_comparison
 
 # Utils
@@ -188,12 +189,6 @@ def fullMethod(FileNameWithoutExtension, ImageCaption, Operation, SuccessMessage
             VD = machineDetection(IMG, __FILE_WITH_EXTENSION)
             Value = VD.busDetector("image")
             ImageCaption = VD.busDetector("")
-
-            # __technique = st.radio("Select one Blurring Algorithm", ('Canny', 'Sobel Laplace'))
-            # if __technique == 'Canny':
-            #     Value = DTE.imgCan("")
-            # if __technique == 'Sobel Laplace':
-            #     Value = DTE.imgSobLap("", grayScale(IMG, __FILE_WITH_EXTENSION).grayImg())
 
         # Saving processed image
         LI.imgSave(Value, FileNameWithoutExtension + __EXTENSION, "Images/")
@@ -496,8 +491,8 @@ if selected == "Detection":
     with st.sidebar:
         choice = option_menu(
             "Detection", 
-            ["Face Detection", "Gender Detection", "License Detection", "Vehicle Detection", "Beta - in progress"], 
-            icons = ['person-circle', 'people-fill', 'tablet-landscape', 'bicycle', 'lock-fill'],
+            ["Face Detection", "Gender Detection", "License Detection", "Vehicle Detection"], 
+            icons = ['person-circle', 'people-fill', 'tablet-landscape', 'bicycle'],
             menu_icon = "person-bounding-box"
         )
     
@@ -544,10 +539,3 @@ if selected == "Detection":
                 "detect", "Bus Detected Image", 11,
                 "Bus Detected", "Bus Based"
             )
-    
-    # When "Beta - in progress" button is clicked on Side bar navigation panel
-    if choice == "Beta - in progress":
-        fullMethod(
-            "detect", "License Plate Detected Image", 12,
-            "License Plate Detected", "License Plate Based"
-        )
